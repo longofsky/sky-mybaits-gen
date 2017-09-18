@@ -76,7 +76,7 @@
     <update id="deleteByIds" parameterType="List">
       UPDATE <include refid="tableName"/> SET valid = 0
         WHERE  ${tbb.pkcol.colName} IN
-		<foreach item="item" index="index" collection="list" open="("separator="," close=")">
+		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
 			#{item,jdbcType=${tbb.pkcol.colType}}
 		</foreach>
         AND valid = 1
