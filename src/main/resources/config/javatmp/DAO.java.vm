@@ -1,0 +1,17 @@
+##DAO代码生成模版
+##使用到的变量有：
+package $!{gb.packageName};
+
+import org.springframework.stereotype.Repository;
+
+import $!{gb.packageName}.$!{tbb.className};
+
+
+public class ${tbb.className}Mapper     {
+
+	//定义特殊的方法
+	
+	
+	
+}
+

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="$!{gb.packageName}.${tbb.className}Mapper">
+   
+   	<!-- //MyBatis生成工具方法 BEGIN -->
+   	<sql id="tableName" >
+		${tbb.tableName}
+	</sql>
+   
+   <!-- BaseResultMap for table columns  -->
+    <resultMap id="BaseResultMap" type="$!{gb.packageName}.${tbb.className}">
+        <id column="${tbb.pkcol.colName}" property="${tbb.pkcol.propertyName}" jdbcType="$!{tbb.pkcol.colType}"/>
+#foreach($cb in $tbb.colList)
+#if($!{cb.colName}!=$!{tbb.pkcol.colName})
+		<result column="$!{cb.colName}" property="$!{cb.propertyName}" jdbcType="$!{cb.colType}"/>
+#end
+#end
+    </resultMap>
+
+    <!-- Base_Column_List -->
+    <sql id="Base_Column_List">
+        #foreach($cb in $tbb.colList)$!{cb.colName}#{if}($velocityCount != $tbb.colList.size()),#{end}#end
+    
+    </sql>
+	
+	<!-- insert -->
+    <insert id="insert" parameterType="$!{gb.packageName}.${tbb.className}">
+        <selectKey resultType="${tbb.pkcol.propertyType}" keyProperty="${tbb.pkcol.propertyName}" order="AFTER">
+            SELECT @@IDENTITY
+        </selectKey>
+        INSERT INTO <include refid="tableName"/> 
+        ( #foreach($cb in $tbb.colList)$!{cb.colName}#{if}($velocityCount != $tbb.colList.size()),#{end}#end)
+        VALUES 
+        (#foreach($cb in $tbb.colList)#{$!{cb.propertyName},jdbcType=$!{cb.colType}} #{if}($velocityCount != $tbb.colList.size()),#{end}#end )
+    </insert>
+    
+    <!-- insertList -->
+	<insert id="insertList"  parameterType="List" >
+		INSERT INTO <include refid="tableName"/> 
+		(#foreach($cb in $tbb.colList)$!{cb.colName}#{if}($velocityCount != $tbb.colList.size()),#{end}#end)
+		VALUES 
+		<foreach collection="list" item="item" index="index" separator=",">
+			(#foreach($cb in $tbb.colList)#{item.$!{cb.propertyName},jdbcType=$!{cb.colType}} #{if}($velocityCount != $tbb.colList.size()),#{end}#end)
+		</foreach>
+	</insert>
+	
+	<!-- findById -->
+    <select id="findById" resultMap="BaseResultMap" parameterType="${tbb.pkcol.propertyType}">
+       SELECT 
+        <include refid="Base_Column_List"/>
+        FROM <include refid="tableName"/>  
+        WHERE $!{tbb.pkcol.colName} = #{$!{tbb.pkcol.propertyName},jdbcType=${tbb.pkcol.colType}}
+        AND valid = 1
+    </select>
+    
+    <!-- findByIds -->
+    <select id="findByIds" resultMap="BaseResultMap" parameterType="List">
+       SELECT 
+        <include refid="Base_Column_List"/>
+        FROM <include refid="tableName"/>
+	WHERE ${tbb.pkcol.colName} IN
+		<foreach item="item" index="index" collection="list" open="("separator="," close=")">
+			#{item,jdbcType=${tbb.pkcol.colType}}
+		</foreach>
+        AND valid = 1
+    </select>
+    
+    <!-- deleteById -->
+    <update id="deleteById" parameterType="${tbb.pkcol.propertyType}">
+      UPDATE <include refid="tableName"/> SET valid = 0
+        WHERE ${tbb.pkcol.colName} = #{${tbb.pkcol.propertyName},jdbcType=${tbb.pkcol.colType}} 
+        AND valid = 1
+    </update>
+    
+     <!-- deleteByIds -->
+    <update id="deleteByIds" parameterType="List">
+      UPDATE <include refid="tableName"/> SET valid = 0
+        WHERE  ${tbb.pkcol.colName} IN
+		<foreach item="item" index="index" collection="list" open="("separator="," close=")">
+			#{item,jdbcType=${tbb.pkcol.colType}}
+		</foreach>
+        AND valid = 1
+    </update>
+    
+	<update id="update" parameterType="$!{gb.packageName}.${tbb.className}">
+		UPDATE <include refid="tableName"/> 
+		<set>
+#foreach($cb in $tbb.colList)
+#if($!{cb.colName}!=$!{tbb.pkcol.colName})
+			$!{cb.colName} = #{$!{cb.propertyName},jdbcType=${cb.colType}},
+#end
+#end
+		</set>
+		WHERE $!{tbb.pkcol.colName} = #{$!{tbb.pkcol.propertyName},jdbcType=${tbb.pkcol.colType}}
+		AND valid = 1
+	</update>	
+	
+	<!-- updateList -->
+	<update id="updateList" parameterType="List">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE <include refid="tableName"/> 
+		<set>
+#foreach($cb in $tbb.colList)
+#if($!{cb.colName}!=$!{tbb.pkcol.colName})
+			$!{cb.colName} = #{item.$!{cb.propertyName},jdbcType=${cb.colType}},
+#end
+#end
+		</set>
+		WHERE $!{tbb.pkcol.colName} = #{item.$!{tbb.pkcol.propertyName},jdbcType=${tbb.pkcol.colType}}
+		AND valid = 1
+		 </foreach>
+	</update>
+	
+     <!-- existsById -->
+    <select id="existsById" resultType="java.lang.Integer" parameterType="${tbb.pkcol.propertyType}">
+       SELECT 1 FROM <include refid="tableName"/>  
+        WHERE $!{tbb.pkcol.colName} = #{$!{tbb.pkcol.propertyName},jdbcType=${tbb.pkcol.colType}}
+        AND valid = 1
+    </select>
+
+	
+	<!-- //MyBatis生成工具方法开 END -->
+	
+
+	<!-- //自定义方法 BEGIN -->
+
+
+	<!-- //自定义方法 END -->
+
+
+</mapper>
