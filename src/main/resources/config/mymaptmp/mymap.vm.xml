@@ -59,7 +59,7 @@
         <include refid="Base_Column_List"/>
         FROM <include refid="tableName"/>
 	WHERE ${tbb.pkcol.colName} IN
-		<foreach item="item" index="index" collection="list" open="("separator="," close=")">
+		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
 			#{item,jdbcType=${tbb.pkcol.colType}}
 		</foreach>
         AND valid = 1

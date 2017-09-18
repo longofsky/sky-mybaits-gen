@@ -85,7 +85,8 @@ public class AllTableInf {
 			tableBean.setPkcol(cb);
 		}
 		// 设置表对象其他字段
-		
+		String sqlOldDateTimeType = "DATETIME";
+		String sqlNewDateTimeType = "TIMESTAMP";
 		List<ColBean> ll = tableBean.getColList();
 		for (Iterator<ColBean> it = ll.iterator(); it.hasNext();) {
 			ColBean cb = it.next();
@@ -94,6 +95,9 @@ public class AllTableInf {
 			cb.setPropertyType(SqlTypeToJavaType.mapJavaType(cb.getColSQLType()));
 			if(cb.getColType().equals(sqlOldIntType) ) {
 				cb.setColType(sqlNewIntType);
+			}
+			else if(cb.getColType().equals(sqlOldDateTimeType) ) {
+				cb.setColType(sqlNewDateTimeType);
 			}
 			
 		}
