@@ -4,3 +4,5 @@
 3. 生成类为com.ibatis.tools.autogen.Gen.java
 4. 数据库配置文件在resources/config/db.properties
 5. 生成的类在：项目根目录的：gendir
+6. 将生成的类，按需求copy入自己的项目
+7. 生成工作结束
