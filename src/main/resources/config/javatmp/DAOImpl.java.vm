@@ -1,0 +1,20 @@
+package $!{gb.packageName}.dao.impl;
+
+import com.mgzf.base.dao.impl.BaseDaoImpl;
+import $!{gb.packageName}.$!{tbb.className}DAO;
+import $!{gb.packageName}.entity.$!{tbb.className}Entity;
+import $!{gb.packageName}.impl.mapper.$!{tbb.className}Mapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+
+@Repository
+public class $!{tbb.className}DAOImpl extends BaseDaoImpl<$!{tbb.className}Mapper, $!{tbb.className}Entity> implements $!{tbb.className}DAO {
+
+    @Autowired
+    @Override
+    public void setEntityMapper($!{tbb.className}Mapper mapper) {
+        entityMapper = mapper;
+    }
+ 
+ }

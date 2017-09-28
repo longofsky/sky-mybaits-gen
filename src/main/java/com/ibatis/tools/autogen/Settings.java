@@ -9,13 +9,15 @@ import org.apache.log4j.Logger;
 
 import com.ibatis.tools.autogen.util.FileUtil;
 import com.ibatis.tools.autogen.util.PropertiesUtil;
+
 /**
  * Function: 数据库及生成路径的配置信息.
+ * 
  * @Date:2014-12-1上午10:18:23
  */
 public class Settings {
 	private final static Logger logger = Logger.getLogger(Settings.class);
-	
+
 	/** 数据库驱动类名 */
 	private String driver;
 	/** 数据库类型 */
@@ -28,20 +30,16 @@ public class Settings {
 	private String dbUser;
 	/** 数据库用户密码 */
 	private String dbPwd;
-	/**模版路径 */
+	/** 模版路径 */
 	private String tmplPath;
-	/**包路径 */
-	private String javaPackage;
+	/** 包路径 */
+	private String daoPackage;
 	/** 代码输出路径 */
 	private String genPath;
 
-	public static final int DB_TYPE_MYSQL = 1;	//Mysql
-	
+	public static final int DB_TYPE_MYSQL = 1; // Mysql
+
 	////
-	private String entityClassPrefix = "";
-	private String entityClassSuffix = "";
-	private String mapperPrefix = "";
-	private String mapperSuffix = "";
 
 	/**
 	 * 初始化系统参数
@@ -51,33 +49,34 @@ public class Settings {
 	 */
 	public boolean initSystemParam() {
 		boolean blnRet = true;
-		
+
 		String dbConfPath = "config/";
 		String absDbPath = ClassLoader.getSystemResource(dbConfPath).getPath();
 		logger.info("开始初始化数据库环境,路径为【" + absDbPath + "】");
-		//加载DB属性文件
+		// 加载DB属性文件
 		List<String> files = FileUtil.getFileListWithExt(absDbPath, ".properties");
 		String propertiesFilename = null;
-		if(files!=null&&files.size()==1){
+		if (files != null && files.size() == 1) {
 			propertiesFilename = files.get(0);
 			logger.info("找到DB属性配置文件,文件名为【" + absDbPath + propertiesFilename + "】");
 		}
-		if(propertiesFilename==null){
-			logger.error("DB属性配置文件在["+absDbPath+"]找不到！");
+		if (propertiesFilename == null) {
+			logger.error("DB属性配置文件在[" + absDbPath + "]找不到！");
 			return false;
 		}
-		//解析属性文件
-		Properties prop = PropertiesUtil.getPropertiesByResourceBundle(dbConfPath + FileUtil.getFilenameWithoutExt(propertiesFilename));
+		// 解析属性文件
+		Properties prop = PropertiesUtil
+				.getPropertiesByResourceBundle(dbConfPath + FileUtil.getFilenameWithoutExt(propertiesFilename));
 		if (prop == null) {
 			logger.error("属性配置文件内容解析为空！");
 			return false;
 		}
-		
-		//设置DB类型及数据库连接信息
+
+		// 设置DB类型及数据库连接信息
 		String type = (String) prop.get("DB_TYPE");
-		if("Mysql".equals(type)){
+		if ("Mysql".equals(type)) {
 			dbType = Settings.DB_TYPE_MYSQL;
-		}else{
+		} else {
 			logger.error("属性配置文件指定的DB_TYPE不存在！type：" + type);
 			blnRet = false;
 		}
@@ -85,36 +84,16 @@ public class Settings {
 		dbName = (String) prop.get("DB_NAME");
 		dbUser = (String) prop.get("DB_USER");
 		dbPwd = (String) prop.get("DB_PWD");
-		javaPackage = (String) prop.get("JAVA_PACKAGE");
-		
+		daoPackage = (String) prop.get("DAO_PACKAGE");
+
 		///
-		entityClassPrefix = (String) prop.get("ENTITY_CLASS_PREFIX");
-		if(entityClassPrefix == null) {
-			entityClassPrefix = "";
-		}
-		entityClassSuffix = (String) prop.get("ENTITY_CLASS_SUFFIX");
-		if(entityClassSuffix == null) {
-			entityClassSuffix = "";
-		}
-		mapperPrefix = (String) prop.get("MAPPER_PREFIX");
-		if(mapperPrefix == null) {
-			mapperPrefix = "";
-		}
-		mapperSuffix = (String) prop.get("MAPPER_SUFFIX");
-		if(mapperSuffix == null) {
-			mapperSuffix = "";
-		}
-		
-		
-		
-		
-		
+
 		tmplPath = dbConfPath;
 		logger.warn("模版路径：" + tmplPath);
 		genPath = System.getProperty("user.dir") + "/gendir/";
 		logger.warn("代码生成输出路径：" + genPath);
-		//打印数据库DAO代码生成环境配置信息
-		Iterator<Entry<Object,Object>> it = prop.entrySet().iterator();
+		// 打印数据库DAO代码生成环境配置信息
+		Iterator<Entry<Object, Object>> it = prop.entrySet().iterator();
 		logger.info("代码生成环境配置信息如下：");
 		while (it.hasNext()) {
 			Entry<Object, Object> en = it.next();
@@ -123,7 +102,7 @@ public class Settings {
 		logger.info("结束初始化数据库代码生成环境【" + absDbPath + propertiesFilename + "】！");
 		return blnRet;
 	}
-	
+
 	public String getDriver() {
 		return driver;
 	}
@@ -180,14 +159,6 @@ public class Settings {
 		this.tmplPath = tmplPath;
 	}
 
-	public String getJavaPackage() {
-		return javaPackage;
-	}
-
-	public void setJavaPackage(String javaPackage) {
-		this.javaPackage = javaPackage;
-	}
-
 	public String getGenPath() {
 		return genPath;
 	}
@@ -196,43 +167,18 @@ public class Settings {
 		this.genPath = genPath;
 	}
 
-	
-	
-	public String getEntityClassPrefix() {
-		return entityClassPrefix;
+	public String getDaoPackage() {
+		return daoPackage;
 	}
 
-	public void setEntityClassPrefix(String entityClassPrefix) {
-		this.entityClassPrefix = entityClassPrefix;
-	}
-
-	public String getEntityClassSuffix() {
-		return entityClassSuffix;
-	}
-
-	public void setEntityClassSuffix(String entityClassSuffix) {
-		this.entityClassSuffix = entityClassSuffix;
-	}
-
-	public String getMapperPrefix() {
-		return mapperPrefix;
-	}
-
-	public void setMapperPrefix(String mapperPrefix) {
-		this.mapperPrefix = mapperPrefix;
-	}
-
-	public String getMapperSuffix() {
-		return mapperSuffix;
-	}
-
-	public void setMapperSuffix(String mapperSuffix) {
-		this.mapperSuffix = mapperSuffix;
+	public void setDaoPackage(String daoPackage) {
+		this.daoPackage = daoPackage;
 	}
 
 	public static int getDbTypeMysql() {
 		return DB_TYPE_MYSQL;
 	}
+
 	public static void main(String[] args) {
 		Settings settings = new Settings();
 		System.out.println(ClassLoader.getSystemResource("").getPath());

@@ -1,13 +1,11 @@
 ##DAO代码生成模版
 ##使用到的变量有：
-package $!{gb.packageName};
+package $!{gb.packageName}.api;
 
-import org.springframework.stereotype.Repository;
+import com.mgzf.base.dao.api.BaseDAO;
+import $!{gb.packageName}.entity.$!{tbb.className}Entity;
 
-import $!{gb.packageName}.$!{tbb.className};
-
-
-public class ${tbb.className}Mapper     {
+public interface ${tbb.className}DAO extends BaseDAO<$!{tbb.className}Entity>     {
 
 	//定义特殊的方法
 	

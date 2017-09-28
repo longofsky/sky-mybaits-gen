@@ -1,0 +1,15 @@
+##DAO代码生成模版
+##使用到的变量有：
+package $!{gb.packageName}.impl.mapper;
+
+import $!{gb.packageName}.$!{tbb.className}Entity;
+import com.mgzf.base.dao.mapper.BaseMapper;
+
+public interface ${tbb.className}Mapper extends BaseMapper<$!{tbb.className}Entity>    {
+
+	//定义特殊的方法
+	
+	
+	
+}
+

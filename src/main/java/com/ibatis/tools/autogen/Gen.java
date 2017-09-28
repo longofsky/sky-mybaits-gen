@@ -37,7 +37,8 @@ public class Gen {
 	public static List<String> tables =new ArrayList<String>();
 	static{
 		//自定义生成的表 表名称添加进list即可，只生成list中的表 ,适合改动过的表重新生成配置文件
-		tables.add("bill_account_mapping");
+		tables.add("oder_reservationorder");
+		tables.add("oder_bookorder");
 	}
 	
 	public Gen(DbConn dbConn){
@@ -79,7 +80,7 @@ public class Gen {
 		//设置工程的全局变量
 		gen.globalBean.setNowDate(DateFormatUtils.format(new Date(), "yyyy-MM-dd"));
 		gen.globalBean.setUserName(System.getenv().get("USERNAME"));
-		gen.globalBean.setPackageName(settings.getJavaPackage());
+		gen.globalBean.setPackageName(settings.getDaoPackage());
 		String tabName;
 		List<String> tableList = gen.allTableInf.getAllTableName();
 		//创建系统目录结构

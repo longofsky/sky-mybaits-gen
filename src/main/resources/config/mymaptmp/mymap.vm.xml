@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="$!{gb.packageName}.${tbb.className}Mapper">
+<mapper namespace="$!{gb.packageName}.impl.mapper.${tbb.className}Mapper">
    
    	<!-- //MyBatis生成工具方法 BEGIN -->
    	<sql id="tableName" >
@@ -8,7 +8,7 @@
 	</sql>
    
    <!-- BaseResultMap for table columns  -->
-    <resultMap id="BaseResultMap" type="$!{gb.packageName}.${tbb.className}">
+    <resultMap id="BaseResultMap" type="$!{gb.packageName}.entity.${tbb.className}Entity">
         <id column="${tbb.pkcol.colName}" property="${tbb.pkcol.propertyName}" jdbcType="$!{tbb.pkcol.colType}"/>
 #foreach($cb in $tbb.colList)
 #if($!{cb.colName}!=$!{tbb.pkcol.colName})
@@ -19,12 +19,12 @@
 
     <!-- Base_Column_List -->
     <sql id="Base_Column_List">
-        #foreach($cb in $tbb.colList)$!{cb.colName}#{if}($velocityCount != $tbb.colList.size()),#{end}#end
+        #foreach($cb in $tbb.colList)tb1.$!{cb.colName}#{if}($velocityCount != $tbb.colList.size()),#{end}#end
     
     </sql>
 	
 	<!-- insert -->
-    <insert id="insert" parameterType="$!{gb.packageName}.${tbb.className}">
+    <insert id="insert" parameterType="$!{gb.packageName}.entity.${tbb.className}Entity">
         <selectKey resultType="${tbb.pkcol.propertyType}" keyProperty="${tbb.pkcol.propertyName}" order="AFTER">
             SELECT @@IDENTITY
         </selectKey>
@@ -48,7 +48,7 @@
     <select id="findById" resultMap="BaseResultMap" parameterType="${tbb.pkcol.propertyType}">
        SELECT 
         <include refid="Base_Column_List"/>
-        FROM <include refid="tableName"/>  
+        FROM <include refid="tableName"/>  tb1
         WHERE $!{tbb.pkcol.colName} = #{$!{tbb.pkcol.propertyName},jdbcType=${tbb.pkcol.colType}}
         AND valid = 1
     </select>
@@ -57,7 +57,7 @@
     <select id="findByIds" resultMap="BaseResultMap" parameterType="List">
        SELECT 
         <include refid="Base_Column_List"/>
-        FROM <include refid="tableName"/>
+        FROM <include refid="tableName"/> tb1
 	WHERE ${tbb.pkcol.colName} IN
 		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
 			#{item,jdbcType=${tbb.pkcol.colType}}
@@ -82,7 +82,7 @@
         AND valid = 1
     </update>
     
-	<update id="update" parameterType="$!{gb.packageName}.${tbb.className}">
+	<update id="update" parameterType="$!{gb.packageName}.entity.${tbb.className}Entity">
 		UPDATE <include refid="tableName"/> 
 		<set>
 #foreach($cb in $tbb.colList)
@@ -113,7 +113,7 @@
 	
      <!-- existsById -->
     <select id="existsById" resultType="java.lang.Integer" parameterType="${tbb.pkcol.propertyType}">
-       SELECT 1 FROM <include refid="tableName"/>  
+       SELECT 1 FROM <include refid="tableName"/> tb1
         WHERE $!{tbb.pkcol.colName} = #{$!{tbb.pkcol.propertyName},jdbcType=${tbb.pkcol.colType}}
         AND valid = 1
     </select>
