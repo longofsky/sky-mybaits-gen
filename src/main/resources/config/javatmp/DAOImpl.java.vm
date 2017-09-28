@@ -1,4 +1,4 @@
-package $!{gb.packageName}.dao.impl;
+package $!{gb.packageName}.impl;
 
 import com.mgzf.base.dao.impl.BaseDaoImpl;
 import $!{gb.packageName}.$!{tbb.className}DAO;
