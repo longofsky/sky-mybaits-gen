@@ -18,7 +18,7 @@ public class SqlTypeToJavaType {
 	static {
 		sqlType2JavaType.put(Types.VARCHAR, "String");
 		sqlType2JavaType.put(Types.DATE, "Date");	//java.util.Date
-		sqlType2JavaType.put(Types.BIT, "Byte");
+		sqlType2JavaType.put(Types.BIT, "Integer");
 		sqlType2JavaType.put(Types.TINYINT, "Integer");
 		sqlType2JavaType.put(Types.SMALLINT, "Integer");
 		sqlType2JavaType.put(Types.INTEGER, "Integer");
