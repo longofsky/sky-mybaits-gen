@@ -37,8 +37,14 @@ public class Gen {
 	public static List<String> tables =new ArrayList<String>();
 	static{
 		//自定义生成的表 表名称添加进list即可，只生成list中的表 ,适合改动过的表重新生成配置文件
-		tables.add("oder_reservationorder");
-		tables.add("oder_bookorder");
+//		tables.add("oder_reservationorder");
+//		tables.add("oder_bookorder");
+		//加载文件，把需要加载的表都放到 tables.properties中
+		List<String> tableFromfile =  LoadTables.laodingTablesFromFile();
+		if(tableFromfile!=null && !tableFromfile.isEmpty()) {
+			tables.addAll(tableFromfile);
+		}
+		
 	}
 	
 	public Gen(DbConn dbConn){
