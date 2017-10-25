@@ -1,14 +1,16 @@
 package com.ibatis.tools.autogen;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map.Entry;
 import java.util.Properties;
 
 import org.apache.log4j.Logger;
 
 import com.ibatis.tools.autogen.util.FileUtil;
-import com.ibatis.tools.autogen.util.PropertiesUtil;
 
 /**
  * Function: 数据库及生成路径的配置信息.
@@ -54,22 +56,18 @@ public class Settings {
 		String absDbPath = ClassLoader.getSystemResource(dbConfPath).getPath();
 		logger.info("开始初始化数据库环境,路径为【" + absDbPath + "】");
 		// 加载DB属性文件
-		List<String> files = FileUtil.getFileListWithExt(absDbPath, ".properties");
-		String propertiesFilename = null;
-		if (files != null && files.size() == 1) {
-			propertiesFilename = files.get(0);
-			logger.info("找到DB属性配置文件,文件名为【" + absDbPath + propertiesFilename + "】");
-		}
-		if (propertiesFilename == null) {
-			logger.error("DB属性配置文件在[" + absDbPath + "]找不到！");
-			return false;
+		String dbConfigFile = absDbPath+"db.properties";
+		if (dbConfigFile != null ) {
+			logger.info("找到DB属性配置文件,文件名为【" + dbConfigFile + "】");
 		}
 		// 解析属性文件
-		Properties prop = PropertiesUtil
-				.getPropertiesByResourceBundle(dbConfPath + FileUtil.getFilenameWithoutExt(propertiesFilename));
-		if (prop == null) {
-			logger.error("属性配置文件内容解析为空！");
-			return false;
+		Properties prop = new Properties();
+		try {
+			prop.load(new FileReader(new File(dbConfigFile)));
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 
 		// 设置DB类型及数据库连接信息
@@ -99,7 +97,7 @@ public class Settings {
 			Entry<Object, Object> en = it.next();
 			logger.info(en.getKey() + "=" + en.getValue());
 		}
-		logger.info("结束初始化数据库代码生成环境【" + absDbPath + propertiesFilename + "】！");
+		logger.info("结束初始化数据库代码生成环境【" + dbConfigFile + "】！");
 		return blnRet;
 	}
 
