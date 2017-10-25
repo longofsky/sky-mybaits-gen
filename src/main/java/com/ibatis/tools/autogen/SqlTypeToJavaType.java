@@ -22,7 +22,7 @@ public class SqlTypeToJavaType {
 		sqlType2JavaType.put(Types.TINYINT, "Integer");
 		sqlType2JavaType.put(Types.SMALLINT, "Integer");
 		sqlType2JavaType.put(Types.INTEGER, "Integer");
-		sqlType2JavaType.put(Types.BIGINT, "Long");
+		sqlType2JavaType.put(Types.BIGINT, "Integer");//公司目前都使用整形
 		sqlType2JavaType.put(Types.REAL, "Float");
 		sqlType2JavaType.put(Types.DOUBLE, "Double");
 		
