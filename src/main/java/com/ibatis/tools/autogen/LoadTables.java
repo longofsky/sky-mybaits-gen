@@ -1,12 +1,9 @@
 package com.ibatis.tools.autogen;
 
-import java.io.FileInputStream;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Properties;
-
 import org.apache.log4j.Logger;
+
+import java.io.FileInputStream;
+import java.util.*;
 
 public class LoadTables {
 
@@ -30,8 +27,11 @@ public class LoadTables {
 		}
 		
 		String tables = prop.getProperty("tables");
+		if(tables ==null || tables.length() == 0){
+			LOGGER.info("tables为空");
+			return Collections.EMPTY_LIST;
+		}
 		LOGGER.info("tables:"+tables);
-		
 		String [] tabArr = tables.split(",");
 		
 		return Arrays.asList(tabArr);

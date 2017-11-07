@@ -1,17 +1,17 @@
 package com.ibatis.tools.autogen;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
+import com.ibatis.tools.autogen.util.FileUtil;
+import com.ibatis.tools.autogen.util.VelocityTemplate;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.time.DateFormatUtils;
 import org.apache.log4j.Logger;
 import org.apache.velocity.VelocityContext;
 
-import com.ibatis.tools.autogen.util.FileUtil;
-import com.ibatis.tools.autogen.util.VelocityTemplate;
+import javax.swing.*;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 /**
  * Function: 入口.
@@ -44,8 +44,15 @@ public class Gen {
 		if(tableFromfile!=null && !tableFromfile.isEmpty()) {
 			tables.addAll(tableFromfile);
 		}
-		
-	}
+		if(tables.isEmpty()){
+			int isComfim = JOptionPane.showConfirmDialog(null, "将生成当前数据库所有表的信息？（由于tables.properties未加载到配置的表）", "生成所有表信息确认",JOptionPane.YES_NO_OPTION);
+			if(isComfim == 1){
+				System.out.println("退出执行！！！");
+				System.exit(0);
+			}
+		}
+		}
+
 	
 	public Gen(DbConn dbConn){
 		allTableInf = new AllTableInf(dbConn);

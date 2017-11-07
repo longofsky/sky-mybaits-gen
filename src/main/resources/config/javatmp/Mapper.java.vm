@@ -7,9 +7,7 @@ import com.mgzf.base.dao.mapper.BaseMapper;
 
 public interface ${tbb.className}Mapper extends BaseMapper<$!{tbb.className}Entity>    {
 
-	//定义特殊的方法
-	
-	
-	
+	//除了在BaseMapper中的基本的方法（CRUD），其它方法需要自己定义及实现
+
 }
 

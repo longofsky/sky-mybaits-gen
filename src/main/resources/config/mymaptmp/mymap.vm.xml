@@ -17,13 +17,13 @@
 #end
     </resultMap>
 
-    <!-- Base_Column_List -->
+    <!-- Base_Column_List 本表的列名 -->
     <sql id="Base_Column_List">
         #foreach($cb in $tbb.colList)tb1.$!{cb.colName}#{if}($velocityCount != $tbb.colList.size()),#{end}#end
     
     </sql>
 	
-	<!-- insert -->
+	<!-- insert 插入-->
     <insert id="insert" parameterType="$!{gb.packageName}.entity.${tbb.className}Entity">
         <selectKey resultType="${tbb.pkcol.propertyType}" keyProperty="${tbb.pkcol.propertyName}" order="AFTER">
             SELECT @@IDENTITY
@@ -34,7 +34,7 @@
         (#foreach($cb in $tbb.colList)#{$!{cb.propertyName},jdbcType=$!{cb.colType}} #{if}($velocityCount != $tbb.colList.size()),#{end}#end )
     </insert>
     
-    <!-- insertList -->
+    <!-- insertList 批量插入-->
 	<insert id="insertList"  parameterType="List" >
 		INSERT INTO <include refid="tableName"/> 
 		(#foreach($cb in $tbb.colList)$!{cb.colName}#{if}($velocityCount != $tbb.colList.size()),#{end}#end)
@@ -44,7 +44,7 @@
 		</foreach>
 	</insert>
 	
-	<!-- findById -->
+	<!-- findById 通过ID查询对象 返回单个对象-->
     <select id="findById" resultMap="BaseResultMap" parameterType="${tbb.pkcol.propertyType}">
        SELECT 
         <include refid="Base_Column_List"/>
@@ -53,7 +53,7 @@
         AND valid = 1
     </select>
     
-    <!-- findByIds -->
+    <!-- findByIds 通过多个ID查询对象 返回列表 -->
     <select id="findByIds" resultMap="BaseResultMap" parameterType="List">
        SELECT 
         <include refid="Base_Column_List"/>
@@ -65,14 +65,14 @@
         AND valid = 1
     </select>
     
-    <!-- deleteById -->
+    <!-- deleteById  通过ID来逻辑删除一条记录 -->
     <update id="deleteById" parameterType="${tbb.pkcol.propertyType}">
       UPDATE <include refid="tableName"/> SET valid = 0
         WHERE ${tbb.pkcol.colName} = #{${tbb.pkcol.propertyName},jdbcType=${tbb.pkcol.colType}} 
         AND valid = 1
     </update>
     
-     <!-- deleteByIds -->
+     <!-- deleteByIds 通过多个ID来逻辑删除多条记录  -->
     <update id="deleteByIds" parameterType="List">
       UPDATE <include refid="tableName"/> SET valid = 0
         WHERE  ${tbb.pkcol.colName} IN
@@ -81,7 +81,8 @@
 		</foreach>
         AND valid = 1
     </update>
-    
+
+    <!-- 通过ID更新一条记录 -->
 	<update id="update" parameterType="$!{gb.packageName}.entity.${tbb.className}Entity">
 		UPDATE <include refid="tableName"/> 
 		<set>
@@ -111,7 +112,7 @@
 		 </foreach>
 	</update>
 	
-     <!-- existsById -->
+     <!-- existsById  通过ID判读是否存在，存在将返回1，不存在将返回NULL,要当心了 -->
     <select id="existsById" resultType="java.lang.Integer" parameterType="${tbb.pkcol.propertyType}">
        SELECT 1 FROM <include refid="tableName"/> tb1
         WHERE $!{tbb.pkcol.colName} = #{$!{tbb.pkcol.propertyName},jdbcType=${tbb.pkcol.colType}}

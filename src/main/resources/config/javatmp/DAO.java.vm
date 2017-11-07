@@ -7,9 +7,7 @@ import $!{gb.packageName}.entity.$!{tbb.className}Entity;
 
 public interface ${tbb.className}DAO extends BaseDAO<$!{tbb.className}Entity>     {
 
-	//定义特殊的方法
-	
-	
+    //除了在BaseDAO中的基本的方法（CRUD），其它方法需要自己定义及实现
 	
 }
 
