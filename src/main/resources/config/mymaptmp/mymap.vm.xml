@@ -50,7 +50,7 @@
         <include refid="Base_Column_List"/>
         FROM <include refid="tableName"/>  tb1
         WHERE $!{tbb.pkcol.colName} = #{$!{tbb.pkcol.propertyName},jdbcType=${tbb.pkcol.colType}}
-        AND valid = 1
+#if($!{tbb.hasValid}) AND valid = 1 #end
     </select>
     
     <!-- findByIds 通过多个ID查询对象 返回列表 -->
@@ -62,14 +62,14 @@
 		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
 			#{item,jdbcType=${tbb.pkcol.colType}}
 		</foreach>
-        AND valid = 1
+#if($!{tbb.hasValid}) AND valid = 1 #end
     </select>
     
     <!-- deleteById  通过ID来逻辑删除一条记录 -->
     <update id="deleteById" parameterType="${tbb.pkcol.propertyType}">
       UPDATE <include refid="tableName"/> SET valid = 0
         WHERE ${tbb.pkcol.colName} = #{${tbb.pkcol.propertyName},jdbcType=${tbb.pkcol.colType}} 
-        AND valid = 1
+#if($!{tbb.hasValid}) AND valid = 1 #end
     </update>
     
      <!-- deleteByIds 通过多个ID来逻辑删除多条记录  -->
@@ -79,7 +79,7 @@
 		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
 			#{item,jdbcType=${tbb.pkcol.colType}}
 		</foreach>
-        AND valid = 1
+#if($!{tbb.hasValid}) AND valid = 1 #end
     </update>
 
     <!-- 通过ID更新一条记录 -->
@@ -93,7 +93,7 @@
 #end
 		</set>
 		WHERE $!{tbb.pkcol.colName} = #{$!{tbb.pkcol.propertyName},jdbcType=${tbb.pkcol.colType}}
-		AND valid = 1
+#if($!{tbb.hasValid}) AND valid = 1 #end
 	</update>	
 	
 	<!-- updateList -->
@@ -108,7 +108,7 @@
 #end
 		</set>
 		WHERE $!{tbb.pkcol.colName} = #{item.$!{tbb.pkcol.propertyName},jdbcType=${tbb.pkcol.colType}}
-		AND valid = 1
+#if($!{tbb.hasValid}) AND valid = 1 #end
 		 </foreach>
 	</update>
 	
@@ -116,7 +116,7 @@
     <select id="existsById" resultType="java.lang.Integer" parameterType="${tbb.pkcol.propertyType}">
        SELECT 1 FROM <include refid="tableName"/> tb1
         WHERE $!{tbb.pkcol.colName} = #{$!{tbb.pkcol.propertyName},jdbcType=${tbb.pkcol.colType}}
-        AND valid = 1
+#if($!{tbb.hasValid}) AND valid = 1 #end
     </select>
 
 	

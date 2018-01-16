@@ -1,7 +1,6 @@
 package com.ibatis.tools.autogen;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Iterator;
@@ -9,8 +8,6 @@ import java.util.Map.Entry;
 import java.util.Properties;
 
 import org.apache.log4j.Logger;
-
-import com.ibatis.tools.autogen.util.FileUtil;
 
 /**
  * Function: 数据库及生成路径的配置信息.
@@ -64,10 +61,8 @@ public class Settings {
 		Properties prop = new Properties();
 		try {
 			prop.load(new FileReader(new File(dbConfigFile)));
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
 		} catch (IOException e) {
-			e.printStackTrace();
+			throw new RuntimeException("加载文件异常："+dbConfigFile,e);
 		}
 
 		// 设置DB类型及数据库连接信息
@@ -79,6 +74,10 @@ public class Settings {
 			blnRet = false;
 		}
 		url = (String) prop.get("DB_SERVER");
+		if(url == null || url.isEmpty()) {
+			url = "localhost";
+		}
+		url = url.trim();
 		dbName = (String) prop.get("DB_NAME");
 		dbUser = (String) prop.get("DB_USER");
 		dbPwd = (String) prop.get("DB_PWD");

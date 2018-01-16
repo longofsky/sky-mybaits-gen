@@ -25,10 +25,10 @@ public class Gen {
 	
 	//生成的Maven结构的代码路径
 	private final static String PATH_JAVA_VM = "/javatmp";
-	private final static String PATH_RESOURCES_VM = "/imaptmp";
+//	private final static String PATH_RESOURCES_VM = "/imaptmp";
 	private final static String PATH_RESOURCES1_VM = "/mymaptmp";
 	private final static String PATH_JAVA = "/java/";
-	private final static String PATH_RESOURCES = "/imap/";
+//	private final static String PATH_RESOURCES = "/imap/";
 	private final static String PATH_RESOURCES1 = "/mymap/";
 	
 	private AllTableInf allTableInf;

@@ -24,7 +24,8 @@ public class TableBean {
 	/** 字段列表 */
 	private List<ColBean> colList = new ArrayList<ColBean>();
 	
-
+	/** 针对公司的逻辑删除 **/
+    private boolean hasValid = false; 
 	
 	/**
 	 * 有参构造函数
@@ -137,6 +138,14 @@ public class TableBean {
 
 	public ColBean getPkcol() {
 		return pkcol;
+	}
+
+	public boolean isHasValid() {
+		return hasValid;
+	}
+
+	public void setHasValid(boolean hasValid) {
+		this.hasValid = hasValid;
 	}
 
 	public TableBean setPkcol(ColBean pkcol) {

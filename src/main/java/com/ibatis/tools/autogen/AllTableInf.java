@@ -230,6 +230,10 @@ public class AllTableInf {
 					cb.setPK(false);
 					tableBean.addColBean(cb);
 				}
+				//是否包含"valid"字段（逻辑删除标识）
+				if(colName.equals("valid")) {
+					tableBean.setHasValid(true);
+				}
 				
 			}
 		} catch (SQLException e) {
