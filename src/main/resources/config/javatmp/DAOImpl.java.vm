@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 
 
 @Repository
-public class $!{tbb.className}DAOImpl extends BaseDaoImpl<$!{tbb.className}Mapper, $!{tbb.className}Entity> implements $!{tbb.className}DAO {
+public class $!{tbb.className}DAOImpl extends BaseMogoDaoImpl<$!{tbb.className}Mapper, $!{tbb.className}Entity> implements $!{tbb.className}DAO {
 
     @Autowired
     @Override

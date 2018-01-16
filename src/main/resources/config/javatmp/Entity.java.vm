@@ -13,7 +13,7 @@
 #set($conf=$!{tbb.conf})
 package $!{gb.packageName}.entity;
 
-import com.mgzf.base.dao.entity.BaseEntity;
+import com.mgzf.base.dao.entity.BaseMogoEntity;
 
 #if($conf.isUpdateObj())
 import java.util.List;
@@ -43,7 +43,7 @@ import java.math.BigDecimal;
  * @author $!{gb.userName}
  * @since $!{gb.nowDate}
  */
-public class $!{tbb.className}Entity extends BaseEntity {
+public class $!{tbb.className}Entity extends BaseMogoEntity {
 
 	/** 序列化ID */
 	private static final long serialVersionUID = 1L;
