@@ -1,6 +1,6 @@
 package $!{gb.packageName}.impl;
 
-import com.mgzf.base.dao.impl.BaseDaoImpl;
+import com.mgzf.base.dao.impl.BaseMogoDaoImpl;
 import $!{gb.packageName}.$!{tbb.className}DAO;
 import $!{gb.packageName}.entity.$!{tbb.className}Entity;
 import $!{gb.packageName}.impl.mapper.$!{tbb.className}Mapper;
