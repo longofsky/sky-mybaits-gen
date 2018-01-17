@@ -1,6 +1,6 @@
 package $!{gb.packageName}.impl;
 
-import com.mgzf.base.dao.impl.BaseMogoDaoImpl;
+import com.mgzf.base.dao.impl.BaseMogoDAOImpl;
 import $!{gb.packageName}.$!{tbb.className}DAO;
 import $!{gb.packageName}.entity.$!{tbb.className}Entity;
 import $!{gb.packageName}.impl.mapper.$!{tbb.className}Mapper;
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 
 
 @Repository
-public class $!{tbb.className}DAOImpl extends BaseMogoDaoImpl<$!{tbb.className}Mapper, $!{tbb.className}Entity> implements $!{tbb.className}DAO {
+public class $!{tbb.className}DAOImpl extends BaseMogoDAOImpl<$!{tbb.className}Mapper, $!{tbb.className}Entity> implements $!{tbb.className}DAO {
 
     @Autowired
     @Override

@@ -2,8 +2,9 @@
 ##使用到的变量有：
 package $!{gb.packageName}.impl.mapper;
 
-import $!{gb.packageName}.$!{tbb.className}Entity;
 import com.mgzf.base.dao.mapper.BaseMogoMapper;
+import $!{gb.packageName}.$!{tbb.className}Entity;
+
 
 public interface ${tbb.className}Mapper extends BaseMogoMapper<$!{tbb.className}Entity>    {
 
