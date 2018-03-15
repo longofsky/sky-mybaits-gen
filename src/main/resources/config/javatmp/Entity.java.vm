@@ -14,6 +14,7 @@
 package $!{gb.packageName}.entity;
 
 import com.mgzf.base.dao.entity.BaseMogoEntity;
+import com.alibaba.fastjson.JSON;
 
 #if($conf.isUpdateObj())
 import java.util.List;
@@ -82,11 +83,12 @@ public class $!{tbb.className}Entity extends BaseMogoEntity {
 
 	@Override
 	public String toString() {
-		return "$!{tbb.className} ["+
-		#foreach($cb in $tbb.colList)
-    	 	"$!{cb.propertyName}="+$!{cb.propertyName} #{if}($velocityCount != $tbb.colList.size())+","#{end} +
-		#end
-		"]";
+##		return "$!{tbb.className} ["+
+##		#foreach($cb in $tbb.colList)
+##    	 	"$!{cb.propertyName}="+$!{cb.propertyName} #{if}($velocityCount != $tbb.colList.size())+","#{end} +
+##		#end
+##		"]";
+		return JSON.toJSONString(this);
 	}
 
 }
