@@ -1,16 +1,18 @@
 package $!{gb.packageName}.impl;
 
 import com.mgzf.base.dao.impl.BaseMogoDAOImpl;
-import $!{gb.packageName}.$!{tbb.className}DAO;
+import $!{gb.packageName}.api.$!{tbb.className}DAO;
 import $!{gb.packageName}.entity.$!{tbb.className}Entity;
 import $!{gb.packageName}.impl.mapper.$!{tbb.className}Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import javax.annotation.Resource;
+
 
 @Repository
 public class $!{tbb.className}DAOImpl extends BaseMogoDAOImpl<$!{tbb.className}Mapper, $!{tbb.className}Entity> implements $!{tbb.className}DAO {
-
+    @Resource(type = $!{tbb.className}Mapper.class )
     @Autowired
     @Override
     public void setEntityMapper($!{tbb.className}Mapper mapper) {

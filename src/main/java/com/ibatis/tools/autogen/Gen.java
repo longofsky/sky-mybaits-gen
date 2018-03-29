@@ -157,7 +157,7 @@ public class Gen {
 //			VelocityTemplate.mergeTemplate(iSqlmapVm, iSqlmapDir + tableBean.getTableName() + ".xml", ctx);
 			//生成mybatis的SqlMap配置文件
 			String mySqlmapVm = settings.getTmplPath() + PATH_RESOURCES1_VM + "/mymap.vm.xml";
-			String mySqlmapDir = settings.getGenPath() + settings.getTmplPath() + PATH_RESOURCES1;
+			String mySqlmapDir = settings.getGenPath() + settings.getTmplPath() + settings.getDaoPackage().replace(".","/")+ "/impl/";
 			FileUtil.mkDirs(mySqlmapDir);
 			VelocityTemplate.mergeTemplate(mySqlmapVm, mySqlmapDir + tableBean.getClassName() + "Mapper.xml", ctx);
 		} catch (Exception e) {

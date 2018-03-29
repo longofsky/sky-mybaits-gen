@@ -3,7 +3,7 @@
 package $!{gb.packageName}.impl.mapper;
 
 import com.mgzf.base.dao.mapper.BaseMogoMapper;
-import $!{gb.packageName}.$!{tbb.className}Entity;
+import $!{gb.packageName}.entity.$!{tbb.className}Entity;
 
 
 public interface ${tbb.className}Mapper extends BaseMogoMapper<$!{tbb.className}Entity>    {
