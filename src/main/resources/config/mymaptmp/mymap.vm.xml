@@ -4,7 +4,7 @@
    
    	<!-- //MyBatis生成工具方法 BEGIN -->
    	<sql id="tableName" >
-		${tbb.tableName} tb1
+		${tbb.tableName} 
 	</sql>
    
    <!-- BaseResultMap for table columns  -->
@@ -19,7 +19,7 @@
 
     <!-- Base_Column_List 本表的列名 -->
     <sql id="Base_Column_List">
-        #foreach($cb in $tbb.colList)tb1.$!{cb.colName}#{if}($velocityCount != $tbb.colList.size()),#{end}#end
+        #foreach($cb in $tbb.colList)$!{cb.colName}#{if}($velocityCount != $tbb.colList.size()),#{end}#end
     
     </sql>
 	
@@ -29,7 +29,7 @@
             SELECT @@IDENTITY
         </selectKey>
         INSERT INTO <include refid="tableName"/> 
-        ( #foreach($cb in $tbb.colList)tb1.$!{cb.colName}#{if}($velocityCount != $tbb.colList.size()),#{end}#end)
+        ( #foreach($cb in $tbb.colList)$!{cb.colName}#{if}($velocityCount != $tbb.colList.size()),#{end}#end)
         VALUES 
         (#foreach($cb in $tbb.colList)#{$!{cb.propertyName},jdbcType=$!{cb.colType}} #{if}($velocityCount != $tbb.colList.size()),#{end}#end )
     </insert>
@@ -37,7 +37,7 @@
     <!-- insertList 批量插入-->
 	<insert id="insertList"  parameterType="List" >
 		INSERT INTO <include refid="tableName"/> 
-		(#foreach($cb in $tbb.colList)tb1.$!{cb.colName}#{if}($velocityCount != $tbb.colList.size()),#{end}#end)
+		(#foreach($cb in $tbb.colList)$!{cb.colName}#{if}($velocityCount != $tbb.colList.size()),#{end}#end)
 		VALUES 
 		<foreach collection="list" item="item" index="index" separator=",">
 			(#foreach($cb in $tbb.colList)#{item.$!{cb.propertyName},jdbcType=$!{cb.colType}} #{if}($velocityCount != $tbb.colList.size()),#{end}#end)
@@ -49,7 +49,7 @@
        SELECT 
         <include refid="Base_Column_List"/>
         FROM <include refid="tableName"/>
-        WHERE tb1.$!{tbb.pkcol.colName} = #{$!{tbb.pkcol.propertyName},jdbcType=${tbb.pkcol.colType}}
+        WHERE $!{tbb.pkcol.colName} = #{$!{tbb.pkcol.propertyName},jdbcType=${tbb.pkcol.colType}}
 #if($!{tbb.hasValid}) AND valid = 1 #end
     </select>
     
@@ -58,7 +58,7 @@
        SELECT 
         <include refid="Base_Column_List"/>
         FROM <include refid="tableName"/>
-	WHERE tb1.${tbb.pkcol.colName} IN
+	WHERE ${tbb.pkcol.colName} IN
 		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
 			#{item,jdbcType=${tbb.pkcol.colType}}
 		</foreach>
@@ -68,14 +68,14 @@
     <!-- deleteById  通过ID来逻辑删除一条记录 -->
     <update id="deleteById" parameterType="${tbb.pkcol.propertyType}">
       UPDATE <include refid="tableName"/> SET valid = 0
-        WHERE tb1.${tbb.pkcol.colName} = #{${tbb.pkcol.propertyName},jdbcType=${tbb.pkcol.colType}}
+        WHERE ${tbb.pkcol.colName} = #{${tbb.pkcol.propertyName},jdbcType=${tbb.pkcol.colType}}
 #if($!{tbb.hasValid}) AND valid = 1 #end
     </update>
     
      <!-- deleteByIds 通过多个ID来逻辑删除多条记录  -->
     <update id="deleteByIds" parameterType="List">
       UPDATE <include refid="tableName"/> SET valid = 0
-        WHERE  tb1.${tbb.pkcol.colName} IN
+        WHERE  ${tbb.pkcol.colName} IN
 		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
 			#{item,jdbcType=${tbb.pkcol.colType}}
 		</foreach>
@@ -88,11 +88,11 @@
 		<set>
 #foreach($cb in $tbb.colList)
 #if($!{cb.colName}!=$!{tbb.pkcol.colName})
-			tb1.$!{cb.colName} = #{$!{cb.propertyName},jdbcType=${cb.colType}},
+			$!{cb.colName} = #{$!{cb.propertyName},jdbcType=${cb.colType}},
 #end
 #end
 		</set>
-		WHERE tb1.$!{tbb.pkcol.colName} = #{$!{tbb.pkcol.propertyName},jdbcType=${tbb.pkcol.colType}}
+		WHERE $!{tbb.pkcol.colName} = #{$!{tbb.pkcol.propertyName},jdbcType=${tbb.pkcol.colType}}
 #if($!{tbb.hasValid}) AND valid = 1 #end
 	</update>	
 	
@@ -103,11 +103,11 @@
 		<set>
 #foreach($cb in $tbb.colList)
 #if($!{cb.colName}!=$!{tbb.pkcol.colName})
-			tb1.$!{cb.colName} = #{item.$!{cb.propertyName},jdbcType=${cb.colType}},
+			$!{cb.colName} = #{item.$!{cb.propertyName},jdbcType=${cb.colType}},
 #end
 #end
 		</set>
-		WHERE tb1.$!{tbb.pkcol.colName} = #{item.$!{tbb.pkcol.propertyName},jdbcType=${tbb.pkcol.colType}}
+		WHERE $!{tbb.pkcol.colName} = #{item.$!{tbb.pkcol.propertyName},jdbcType=${tbb.pkcol.colType}}
 #if($!{tbb.hasValid}) AND valid = 1 #end
 		 </foreach>
 	</update>
@@ -115,7 +115,7 @@
      <!-- existsById  通过ID判读是否存在，存在将返回1，不存在将返回NULL,要当心了 -->
     <select id="existsById" resultType="java.lang.Integer" parameterType="${tbb.pkcol.propertyType}">
        SELECT 1 FROM <include refid="tableName"/>
-        WHERE tb1.$!{tbb.pkcol.colName} = #{$!{tbb.pkcol.propertyName},jdbcType=${tbb.pkcol.colType}}
+        WHERE $!{tbb.pkcol.colName} = #{$!{tbb.pkcol.propertyName},jdbcType=${tbb.pkcol.colType}}
 #if($!{tbb.hasValid}) AND valid = 1 #end
     </select>
 

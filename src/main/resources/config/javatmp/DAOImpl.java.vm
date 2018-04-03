@@ -13,7 +13,6 @@ import javax.annotation.Resource;
 @Repository
 public class $!{tbb.className}DAOImpl extends BaseMogoDAOImpl<$!{tbb.className}Mapper, $!{tbb.className}Entity> implements $!{tbb.className}DAO {
     @Resource(type = $!{tbb.className}Mapper.class )
-    @Autowired
     @Override
     public void setEntityMapper($!{tbb.className}Mapper mapper) {
         entityMapper = mapper;

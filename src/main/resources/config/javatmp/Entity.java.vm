@@ -56,11 +56,9 @@ public class $!{tbb.className}Entity extends BaseMogoEntity {
 
 #foreach($cb in $tbb.colList)
 	
-    /** 获取属性:$!{cb.propertyName},$!{cb.colComment} */
    public $!{cb.propertyType} get$!{cb.methodName}() {
        return $!{cb.propertyName};
    }
-   /** 设置属性:$!{cb.propertyName},$!{cb.colComment} */
    public void set$!{cb.methodName}($!{cb.propertyType} $!{cb.propertyName}) {
        this.$!{cb.propertyName} = $!{cb.propertyName};
    }
@@ -83,11 +81,6 @@ public class $!{tbb.className}Entity extends BaseMogoEntity {
 
 	@Override
 	public String toString() {
-##		return "$!{tbb.className} ["+
-##		#foreach($cb in $tbb.colList)
-##    	 	"$!{cb.propertyName}="+$!{cb.propertyName} #{if}($velocityCount != $tbb.colList.size())+","#{end} +
-##		#end
-##		"]";
 		return JSON.toJSONString(this);
 	}
 
