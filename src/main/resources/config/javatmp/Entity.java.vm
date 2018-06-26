@@ -47,21 +47,24 @@ import java.math.BigDecimal;
 public class $!{tbb.className}Entity extends BaseMogoEntity {
 
 	/** 序列化ID */
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
 #foreach($cb in $tbb.colList)
+#if($!{cb.propertyName}!="id")
 	/** $!{cb.colComment} **/
-    private $!{cb.propertyType} $!{cb.propertyName};
+	private $!{cb.propertyType} $!{cb.propertyName};
+#end
 #end
 
 #foreach($cb in $tbb.colList)
-	
-   public $!{cb.propertyType} get$!{cb.methodName}() {
+#if($!{cb.propertyName}!="id")
+    public $!{cb.propertyType} get$!{cb.methodName}() {
        return $!{cb.propertyName};
    }
-   public void set$!{cb.methodName}($!{cb.propertyType} $!{cb.propertyName}) {
-       this.$!{cb.propertyName} = $!{cb.propertyName};
-   }
+    public void set$!{cb.methodName}($!{cb.propertyType} $!{cb.propertyName}) {
+        this.$!{cb.propertyName} = $!{cb.propertyName};
+    }
+#end
 #end
 
 #if($conf.isUpdateObj())
@@ -69,15 +72,15 @@ public class $!{tbb.className}Entity extends BaseMogoEntity {
      * 需要更新时的代码，keys 代表主键list
      */
 	private List<Long> keys;
-		
+
 	public List<Long> getKeys() {
 		return keys;
 	}
-	
+
 	public void setIds(List<Long> keys) {
 		this.keys = keys;
 	}
-#end	
+#end
 
 	@Override
 	public String toString() {

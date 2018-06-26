@@ -5,7 +5,11 @@ package $!{gb.packageName}.impl.mapper;
 import com.mgzf.base.dao.mapper.BaseMogoMapper;
 import $!{gb.packageName}.entity.$!{tbb.className}Entity;
 
-
+/**
+ *
+ * @author $!{gb.userName}
+ * @since $!{gb.nowDate}
+ */
 public interface ${tbb.className}Mapper extends BaseMogoMapper<$!{tbb.className}Entity>    {
 
 	//除了在BaseMapper中的基本的方法（CRUD），其它方法需要自己定义及实现
