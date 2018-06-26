@@ -9,7 +9,11 @@ import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
 
-
+/**
+ *
+ * @author $!{gb.userName}
+ * @since $!{gb.nowDate}
+ */
 @Repository
 public class $!{tbb.className}DAOImpl extends BaseMogoDAOImpl<$!{tbb.className}Mapper, $!{tbb.className}Entity> implements $!{tbb.className}DAO {
     @Resource(type = $!{tbb.className}Mapper.class )

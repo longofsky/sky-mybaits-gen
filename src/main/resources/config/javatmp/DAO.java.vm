@@ -4,7 +4,11 @@ package $!{gb.packageName}.api;
 
 import com.mgzf.base.dao.api.BaseMogoDAO;
 import $!{gb.packageName}.entity.$!{tbb.className}Entity;
-
+/**
+ *
+ * @author $!{gb.userName}
+ * @since $!{gb.nowDate}
+ */
 public interface ${tbb.className}DAO extends BaseMogoDAO<$!{tbb.className}Entity>     {
 
     //除了在BaseDAO中的基本的方法（CRUD），其它方法需要自己定义及实现
