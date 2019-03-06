@@ -1,5 +1,4 @@
-# Generator使用方法
-先执行 git clone http://git.mogo.com/daiderong/mogo-mybaits-gen.git,然后用idea打开项目，执行生成类文件的工具类就可以了。
+# Generator使用方
 1. 能够生成单表相关的Mapper.xml，Entity，Dao相关的方法
 2. 必须连接mysql方能自动生成，数据库配置文件在resources/config/db.properties
 3. 将要生成的表名放在resources/config/tables.properties中，然后执行生成类为com.ibatis.tools.autogen.Gen.java
